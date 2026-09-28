@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Цветы | Доставка | Рыбница - Forever Young</title>
+    <style>
+        :root {
+            --primary-color: #d63384;
+            --primary-light: #f8d7da;
+            --dark-color: #2b2b2b;
+            --light-color: #fcf8f8;
+            --white: #ffffff;
+            --gray-border: #e0e0e0;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light-color);
+            color: var(--dark-color);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1a1a1a, #2b2b2b);
+            color: var(--white);
+            padding: 4rem 1rem;
+            text-align: center;
+            border-bottom: 4px solid var(--primary-color);
+        }
+
+        .logo-container {
+            width: 90px;
+            height: 90px;
+            margin: 0 auto 1.2rem auto;
+            border-radius: 50%;
+            overflow: hidden;
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        .logo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #ddd;
+            margin-bottom: 1.5rem;
+        }
+
+        .shop-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            margin-top: 1.2rem;
+            font-size: 1rem;
+            color: #ccc;
+        }
+
+        .shop-info span {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .section {
+            margin-bottom: 3.5rem;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--dark-color);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: var(--primary-color);
+            margin: 0.5rem auto 0;
+            border-radius: 2px;
+        }
+
+        .instagram-banner {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+
+        .instagram-banner a {
+            color: var(--primary-color);
+            font-weight: 700;
+            text-decoration: none;
+            border-bottom: 2px dashed var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .instagram-banner a:hover {
+            color: #b52b72;
+            border-color: #b52b72;
+        }
+
+        /* Grid for Cards */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            border: 1px solid var(--gray-border);
+            padding: 15px;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Эффект переливающейся градиентной рамки вокруг фото */
+        @keyframes borderAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .gradient-border-wrapper {
+            position: relative;
+            border-radius: 10px;
+            padding: 4px; /* Толщина рамки */
+            background: linear-gradient(270deg, #ff758c, #ff7eb3, #d63384, #8a2be2, #4facfe);
+            background-size: 400% 400%;
+            animation: borderAnimation 8s ease infinite;
+            cursor: pointer;
+        }
+
+        .card-img-container {
+            width: 100%;
+            height: 320px;
+            background: #f0f0f0;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .card-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .card:hover .card-img-container img {
+            transform: scale(1.03);
+        }
+
+        .badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(40, 167, 69, 0.9);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .card-footer {
+            margin-top: 15px;
+        }
+
+        .btn-order {
+            display: block;
+            background: #7360f2; /* Фирменный цвет Viber */
+            color: white;
+            text-align: center;
+            padding: 0.7rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .btn-order:hover {
+            background: #5c48d0;
+        }
+
+        /* Lightbox Modal Styles */
+        #lightbox {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            justify-content: center;
+            align-items: center;
+        }
+
+        #lightbox.active {
+            display: flex;
+        }
+
+        #lightbox img {
+            max-width: 85%;
+            max-height: 85vh;
+            border-radius: 8px;
+            object-fit: contain;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.5);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            font-size: 40px;
+            color: white;
+            cursor: pointer;
+            font-weight: bold;
+            transition: var(--transition);
+        }
+
+        .lightbox-close:hover {
+            color: var(--primary-color);
+        }
+
+        .lightbox-prev, .lightbox-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 15px 20px;
+            font-size: 24px;
+            border: none;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: var(--transition);
+        }
+
+        .lightbox-prev:hover, .lightbox-next:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .lightbox-prev { left: 30px; }
+        .lightbox-next { right: 30px; }
+
+        /* Reviews Section Styles */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .review-card {
+            background: var(--white);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid var(--gray-border);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+
+        .review-header {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .review-text {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            background: #1a1a1a;
+            color: #aaa;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .lightbox-prev, .lightbox-next {
+                padding: 10px 15px;
+                font-size: 18px;
+            }
+            .lightbox-prev { left: 10px; }
+            .lightbox-next { right: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <img src="logo.png" alt="Логотип Forever Young">
+        </div>
+        <h1>Цветы | Доставка | Рыбница</h1>
+        <p>🌿 Forever Young — Мы рядом в каждый особенный момент</p>
+        <div class="shop-info">
+            <span>⏰ Ежедневно 7:00 - 22:00</span>
+            <span>📍 г. Рыбница, пл. Победы, 3/2 (напротив ЗАГСа)</span>
+            <span>📞 Viber/Тел: +373 778 35725</span>
+        </div>
+    </header>
+
+    <div class="container">
+        
+        <section class="section">
+            <h2 class="section-title">В наличии</h2>
+            <div class="instagram-banner">
+                Точное наличие и актуальные обновления можно всегда узнать в нашем <a href="https://www.instagram.com/forever_young_ribnita?stkn=MWd5Z3BzemMxY3dlbw==" target="_blank">Instagram</a>!
+            </div>
+            <div class="grid">
+                
+                <!-- Карточки с 1 по 12 -->
+                <script>
+                    for (let i = 1; i <= 12; i++) {
+                        document.write(`
+                            <div class="card">
+                                <div class="gradient-border-wrapper" onclick="openLightbox(${i-1})">
+                                    <div class="card-img-container">
+                                        <span class="badge">В наличии</span>
+                                        <img src="${i}.jpg" alt="Букет ${i}" class="gallery-img">
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="viber://chat?number=%2B37377835725" class="btn-order">Заказать в Viber</a>
+                                </div>
+                            </div>
+                        `);
+                    }
+                </script>
+
+            </div>
+        </section>
+
+        <!-- Отзывы -->
+        <section class="section">
+            <h2 class="section-title">Отзывы наших клиентов</h2>
+            <div class="reviews-grid">
+                <div class="review-card">
+                    <div class="review-header">iulka_fedorovich</div>
+                    <div class="review-text">«Спасибо за шикарный букет! Огромный восторг!»</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">malai.sveta</div>
+                    <div class="review-text">«Спасибо за потрясающие цветы, сервис на высоте! Рекомендую всем в Рыбнице.»</div>
+                </div>
+                <div class="review-card">
+                    <div class="review-header">valia_and_family</div>
+                    <div class="review-text">«Заказывали бутоньерки и маленькие букеты — всё свежее, красивое и с быстрой доставкой.»</div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Модальное окно (Lightbox) -->
+    <div id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">&times;</span>
+        <button class="lightbox-prev" onclick="changeSlide(-1)">&#10094;</button>
+        <img id="lightbox-img" src="" alt="Увеличенное фото">
+        <button class="lightbox-next" onclick="changeSlide(1)">&#10095;</button>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Forever Young — Цветы и доставка в Рыбнице. Все права защищены.<br>
+        Связь с нами: <a href="viber://chat?number=%2B37377835725">+373 778 35725</a></p>
+    </footer>
+
+    <script>
+        let currentIndex = 0;
+        const images = [];
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const imgElements = document.querySelectorAll('.gallery-img');
+            imgElements.forEach(img => images.push(img.src));
+        });
+
+        function openLightbox(index) {
+            currentIndex = index;
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            lightboxImg.src = images[currentIndex];
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.remove('active');
+        }
+
+        function changeSlide(direction) {
+            currentIndex += direction;
+            if (currentIndex >= images.length) {
+                currentIndex = 0;
+            } else if (currentIndex < 0) {
+                currentIndex = images.length - 1;
+            }
+            document.getElementById('lightbox-img').src = images[currentIndex];
+        }
+
+        document.addEventListener('keydown', function(e) {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                if (e.key === 'ArrowLeft') {
+                    changeSlide(-1);
+                } else if (e.key === 'ArrowRight') {
+                    changeSlide(1);
+                } else if (e.key === 'Escape') {
+                    closeLightbox();
+                }
+            }
+        });
+    </script>
+
+</body>
+</html>
